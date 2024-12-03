@@ -1,6 +1,8 @@
-# Code supporting Marching into the leadership Pipeline:  Race and Gender in ROTC Participation
-#
+# Code supporting Letzler, Janoska Bedi, and Penner.  Marching into the leadership Pipeline:  Race and Gender in ROTC Participation, Socius
+# The markdown for the supplement which is necessary to run this code is available at allorama.org/supplement.md and the data are available at 
+# https://files.gao.gov/interactive/data/105857/GAO-23-105857-ROTC-Diversity-data-documentation-tab-is-in-excel-sheet.zip
 # 2023-24
+# programmed by Robert Letzler
 
 import os
 
