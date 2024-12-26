@@ -1,8 +1,6 @@
-# Code supporting Letzler, Janoska Bedi, and Penner.  Marching into the leadership Pipeline:  Race and Gender in ROTC Participation, Socius
-# The markdown for the supplement which is necessary to run this code is available at allorama.org/supplement.md and the data are available at 
-# https://files.gao.gov/interactive/data/105857/GAO-23-105857-ROTC-Diversity-data-documentation-tab-is-in-excel-sheet.zip
+# Code supporting Marching into the leadership Pipeline:  Race and Gender in ROTC Participation
+#
 # 2023-24
-# programmed by Robert Letzler
 
 import os
 
@@ -333,7 +331,7 @@ for key in ["additional_black_officers_from_black_completion_rate_parity", "addi
 
 
 for group in ["female","minority", "black"]:
-    df_campus[f"Net contribution of {group} officers"] = df_campus[f"count_commissioned_{group}"]*((df_campus[f"count_commissioned_{group}"]/df_campus[f"count_commissioned"])-(int(dod_wide_summary[f"count_commissioned_{group}"])/int(dod_wide_summary[f"count_commissioned"])))
+    df_campus[f"Net contribution of {group} officers"] = df_campus[f"count_commissioned"]*((df_campus[f"count_commissioned_{group}"]/df_campus[f"count_commissioned"])-((int(dod_wide_summary[f"count_commissioned_{group}"])-df_campus[f"count_commissioned_{group}"])/(int(dod_wide_summary[f"count_commissioned"])-df_campus[f"count_commissioned"])))
 
 # capitalize for output
 df_campus.rename(columns={"Net contribution of black officers": "Net contribution of Black officers"}, inplace=True)
@@ -348,7 +346,7 @@ net_impact_of_host_diversity_scatter_all_other_races_female = px.scatter(
                 y="Net contribution of female officers", 
                 color=f"campus_category_unique_for_icons_and_dropdowns",
                 size=f'count_commissioned_female',
-                custom_data = ['institution_name','services_on_campus', f'count_ipeds', 'count_commissioned',f'count_commissioned_female', "Net contribution of Black officers",],
+                custom_data = ['institution_name','services_on_campus', 'count_ipeds', 'count_commissioned','count_commissioned_female', "Net contribution of Black officers",],
                 category_orders={"campus_category_unique_for_icons_and_dropdowns": ["All Other Schools", "Military Colleges", "Historically Black Colleges and Universities (HBCUs)"]} #order so that "All other schools" are on the bottom
                 )
 
@@ -415,24 +413,42 @@ for fig_name in ["percent_female_scatterplot",  "net_impact_of_host_diversity_sc
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False)
 
+
+
+
     #CUSTOMIZE THE HOVERTEXT THAT POPS UP WHEN THE USER MOUSES OVER EACH POINT ON THE GRAPH
     #for documentation of formatting of the values in the hovertemplate, see:  https://plotly.com/javascript/hover-text-and-formatting/
-    fig.update_traces(hovertemplate="<br>".join([
+
+    if fig_name == "net_impact_of_host_diversity_scatter_all_other_races_female":
+        # the net impact mouse over text is different.
+        fig.update_traces(hovertemplate="<br>".join([
                 "%{customdata[0]}",
                 "%{customdata[1]}",
                 "Average annual total students:  %{customdata[2]:,.1f}",
-                "Average annual total female students:  %{customdata[4]:,.1f}",
-                "Average annual students enrolling in ROTC: %{customdata[8]:.1f}",
                 "Average annual graduates commissioned:  %{customdata[3]:.1f}",
-                "Annual average female students enrolling in ROTC:  %{customdata[5]:.1f}",
-                "Annual average female students commissioned:  %{customdata[6]:.1f}" ,
-                "Female officers commissioned (p-value):  %{customdata[9]:.1f}% (%{customdata[10]:.3f})" ,
-                "We report the p-value for the hypothesis that the proportion",
-                "of female officers commissioned on this campus is equal to",
-                "the proportion commissioned in the rest of the ROTC program." ,
+                "Annual average female students commissioned:  %{customdata[4]:.1f}" ,
+                "Net contribution of female officers:  %{y:.1f}",
+                "Net contribution of Black officers:   %{customdata[5]:.1f}", 
+                "Net contribution of minority officers:   %{x:.1f}"
                 "<extra></extra>"
-            ])
-    )
+            ]))
+    else:  #if it's not net_impact, apply the standard mouse over text
+        fig.update_traces(hovertemplate="<br>".join([
+                    "%{customdata[0]}",
+                    "%{customdata[1]}",
+                    "Average annual total students:  %{customdata[2]:,.1f}",
+                    "Average annual total female students:  %{customdata[4]:,.1f}",
+                    "Average annual students enrolling in ROTC: %{customdata[8]:.1f}",
+                    "Average annual graduates commissioned:  %{customdata[3]:.1f}",
+                    "Annual average female students enrolling in ROTC:  %{customdata[5]:.1f}",
+                    "Annual average female students commissioned:  %{customdata[6]:.1f}" ,
+                    "Female officers commissioned (p-value):  %{customdata[9]:.1f}% (%{customdata[10]:.3f})" ,
+                    "We report the p-value for the hypothesis that the proportion",
+                    "of female officers commissioned on this campus is equal to",
+                    "the proportion commissioned in the rest of the ROTC program." ,
+                    "<extra></extra>"
+                ])
+        )
 
 
     fig.data[2]["marker"]["symbol"]="circle"
@@ -501,19 +517,7 @@ for fig_name in ["percent_female_scatterplot",  "net_impact_of_host_diversity_sc
 
 
 
-# the net impact mouse over text is different.  We implement that by overwriting the default mouse over text here.
-net_impact_of_host_diversity_scatter_all_other_races_female.update_traces(hovertemplate="<br>".join([
-                "%{customdata[0]}",
-                "%{customdata[1]}",
-                "Average annual total students:  %{customdata[2]:.1f}",
-                "Average annual graduates commissioned:  %{customdata[3]:.1f}",
-                "Annual average female students commissioned:  %{customdata[4]:.1f}" ,
-                "Net contribution of female officers:  %{y:.1f}",
-                "Net contribution of Black officers:   %{customdata[5]:.1f}", 
-                "Net contribution of minority officers:   %{x:.1f}"
-                "<extra></extra>"
-            ])
-    )
+
 
 supplement_jinja_data["net_impact_of_host_diversity_scatter_all_other_races_female"]=net_impact_of_host_diversity_scatter_all_other_races_female.to_html(config=config_dict, include_plotlyjs="plotly-2.29.1.min.js",full_html=False)
 

@@ -27,7 +27,7 @@ td, th {
 
 Robert Letzler, Signe Janoska-Bedi, and Andrew Penner
 
-Our supplement also includes [code](https://raw.githubusercontent.com/marching-into-the-leadership-pipeline/marching-into-the-leadership-pipeline.github.io/main/make_socius_graph_and_integrate_socius_supplement.py) and the [markdown necessary to run that code.](https://marching-into-the-leadership-pipeline.github.io/supplement.md)
+Our supplement also includes [code](https://allorama.org/marching.py) and the [markdown necessary to run that code.](https://marching-into-the-leadership-pipeline.github.io/supplement.md).  This document contains the definitive text.  It varies slightly from the draft produced by that markdown.
 
 # Putting Female and Black HBCU ROTC participants in context
 
