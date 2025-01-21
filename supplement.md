@@ -27,7 +27,7 @@ td, th {
 
 Robert Letzler, Signe Janoska-Bedi, and Andrew Penner
 
-Our supplement also includes [code](https://allorama.org/marching.py) and the [markdown necessary to run that code.](https://marching-into-the-leadership-pipeline.github.io/supplement.md).  This document contains the definitive text.  It varies slightly from the draft produced by that markdown.
+Our supplement also includes [code](https://allorama.org/marching.py) and the [markdown necessary to run that code.](https://marching-into-the-leadership-pipeline.github.io/supplement.md).  [The supplement published in Socius](https://journals.sagepub.com/doi/suppl/10.1177/23780231241297776/suppl_file/sj-pdf-1-srd-10.1177_23780231241297776.pdf) contains the definitive supplement text.  It varies slightly from the draft produced by this markdown file.  We have published this file so that interested readers can run and understand our code.
 
 # Putting Female and Black HBCU ROTC participants in context
 
