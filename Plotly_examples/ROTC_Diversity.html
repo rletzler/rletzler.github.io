@@ -4,18 +4,124 @@
 
 <script src="plotly-3.1.0.min.js" charset="utf-8"></script>
 
+
+
 <link rel="stylesheet" href="./markdown-css-themes/markdown3.css">
+<!--            box-sizing: border-box;
+            
+max-width:42em;
 
+-->
 <style>
-body{
-    max-width:80em;
+       
+      .content{
+    max-width:42em;
     }
-</style>
-</head>
 
+
+        .navbar {
+            background-color: #333;
+            display: flex; /* Establishes the flex container */
+            align-items: center;
+            padding: 0.5rem 2rem;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+          }
+          
+      
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+           font-size: 15px;
+        }
+
+        /* THE FIX: This pushes everything after these two links to the right */
+        .nav-left {
+            margin-right: auto; 
+        }
+
+        .nav-links li { margin: 0 10px; }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+        }
+
+        /* Active Page Highlight */
+        .nav-links a.active {
+            background-color: #04AA6D;
+            border-radius: 4px;
+        }
+
+        /* Hamburger Toggle (Mobile Only) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .menu-toggle span {
+            height: 3px;
+            width: 25px;
+            background: white;
+            margin: 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-right {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: #444;
+                text-align: center;
+            }
+            .nav-right.show { display: flex; }
+            .nav-right li { margin-bottom: 10px; }
+
+        }
+    </style>
+</head>
 <body style="margin:0">
 
-  <table><tr><th>This teaching example is adapted from an interactive graphic in the public domain.  Similar information is public in a more complete and authoritative form that is more appropriate to cite.</th></tr></table>
+
+<nav class="navbar">
+    <!-- These stay on the left -->
+    <ul class="nav-links nav-left">
+        <li><a href="https://plotly.com/blog/publishing-plotly-analytics-at-resource-constrained-orgs/">Publishing in Plotly at Resource-Constrained Organizations</a></li>
+        <li><a href="https://plotly.com/blog/standing-on-many-shoulders-to-design-effective-interactive-graphics/">Designing Effective Interactives</a></li>
+    </ul>
+    
+    <div class="menu-toggle" id="mobile-menu">
+        <span></span><span></span><span></span>
+    </div>
+
+    <!-- These are pushed to the right -->
+    <ul class="nav-links nav-right" id="nav-list">
+        <li style="color: LightGray;">Examples:</li>
+        <li><a href="https://allorama.org/Plotly_examples/Timeliness%20of%20Awards%20for%20Small%20Business%20Innovation%20Research%20and%20Small%20Business%20Technology%20Transfer%20Programs.html">Compliance Bar</a></li>
+        <li><a href="https://allorama.org/Plotly_examples/ROTC_Diversity.html"  class="active">Diversity by Stage Bar</a></li>
+        <li><a href="https://allorama.org/Plotly_examples/Social Security Administration Program Provision During COVID-19 Pandemic.html">Trends</a></li>
+        <li><a href="https://allorama.org/Plotly_examples/spending.html">Spending by State</a></li>
+    </ul>
+</nav>
+
+<script>
+    document.getElementById('mobile-menu').onclick = function() {
+        document.getElementById('nav-list').classList.toggle('show');
+    };
+</script>
+
+
+
+
+  
+<table><tr><th><br>This teaching example is adapted from an interactive graphic in the public domain.  Similar information is public in a more complete and authoritative form that is more appropriate to cite.</th></tr></table>
 
 
   <div style="padding:20px">
